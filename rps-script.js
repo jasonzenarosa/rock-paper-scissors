@@ -27,7 +27,28 @@ function getPlayerChoice() {
     }
 }
 
-let player_choice = getPlayerChoice()
-let computer_choice = getComputerChoice()
+function playGame(player_choice, computer_choice) {
+    let result
 
-alert(`Player Choice: ${player_choice}\nComputer Choice: ${computer_choice}`)
+    if (player_choice === computer_choice) {
+        result = "It's a tie!"
+    } else if ((player_choice === 'R' && computer_choice === 'P') || (player_choice === 'P' && computer_choice === 'S') || (player_choice === 'S' && computer_choice === 'R')) {
+        result = 'You lost!'
+    } else if ((player_choice === 'P' && computer_choice === 'R') || (player_choice === 'S' && computer_choice === 'P') || (player_choice === 'R' && computer_choice === 'S')) {
+        result = 'You won!'
+    }
+    return `Your choice: ${player_choice}\nComputer choice: ${computer_choice}\n${result}`
+}
+
+let player_choice
+let computer_choice
+
+while (true) {
+    player_choice = getPlayerChoice()
+    if (!player_choice) {
+        alert('Invalid input! Try again.')
+    } else {
+        computer_choice = getComputerChoice()
+        alert(playGame(player_choice, computer_choice))
+    }
+}
